@@ -32,7 +32,7 @@ function generator(options, _generator) {
 
   let length = 5; // 默认长度为5
   if (config.lengthRange) {
-    const randomLength = Math.round(getRandomNumber(config.lengthRange[0], config.lengthRange[1]));
+    const randomLength = getRandomNumber(config.lengthRange[0], config.lengthRange[1]);
     length = randomLength;
   } else {
     length = config.length ? config.length : length;

@@ -1,5 +1,9 @@
-function getRandomNumber(min, max) {
+function getRandomFloat(min, max) {
   return Math.random() * (max - min) + min;
+}
+
+function getRandomNumber(min, max) {
+  return Math.round(Math.random() * (max - min) + min);
 }
 
 function getRandomChineseWord(){ 
@@ -27,6 +31,7 @@ function dateFormat(date, fmt = 'YYYY-mm-dd HH:MM:SS') {
   return fmt;
 }
 
+exports.getRandomFloat = getRandomFloat;
 exports.getRandomNumber = getRandomNumber;
 exports.getRandomChineseWord = getRandomChineseWord;
 exports.dateFormat = dateFormat;

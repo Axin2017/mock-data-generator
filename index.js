@@ -11,52 +11,70 @@ function createMockData(configFilePath, outputPath) {
 const result = generator({
   type: TYPES_MAP.array,
   config: {
-    lengthRange: [2, 10]
+    lengthRange: [12, 30]
   },
-  children: [
-    {
-      type: TYPES_MAP.object,
-      children: [
-        {
-          key: 'username',
-          type: TYPES_MAP.string,
-          config: {
-            lengthRange: [2, 3]
-          },
+  itemConfig:
+  {
+    type: TYPES_MAP.object,
+    properties: [
+      {
+        key: 'id',
+        type: TYPES_MAP.string,
+        config: {
+          lengthRange: [10, 15]
         },
-        {
-          key: 'follow_times',
-          type: TYPES_MAP.number,
-          config: {
-            range: [100, 900],
-          },
+      },
+      {
+        key: 'project',
+        type: TYPES_MAP.string,
+        config: {
+          lengthRange: [5, 10]
         },
-        {
-          key: 'deal_time',
-          type: TYPES_MAP.date,
-          config: {
-            dateRange: ['2021-01-01', '2021-03-09'],
-            formater: 'YYYY-mm-dd HH:MM:SS'
-          },
+      },
+      {
+        key: 'title',
+        type: TYPES_MAP.string,
+        config: {
+          lengthRange: [5, 10]
         },
-        {
-          key: 'time',
-          type: TYPES_MAP.date,
-          config: {
-            dateRange: ['2021-01-01', '2021-03-09'],
-            formater: 'YYYY-mm-dd'
-          },
+      },
+      {
+        key: 'language',
+        type: TYPES_MAP.oneOf,
+        config: {
+          oneOf: ['zh_CN', 'en_US'],
         },
-        {
-          key: 'monitor',
-          type: TYPES_MAP.string,
-          config: {
-            lengthRange: [2, 3]
-          },
+      },
+      {
+        key: 'version',
+        type: TYPES_MAP.string,
+        config: {
+          lengthRange: [2, 3]
         },
-      ]
-    },
-  ],
+      },
+      {
+        key: 'des',
+        type: TYPES_MAP.string,
+        config: {
+          lengthRange: [0, 200]
+        },
+      },
+      {
+        key: 'updateBy',
+        type: TYPES_MAP.string,
+        config: {
+          lengthRange: [1, 3]
+        },
+      },
+      {
+        key: 'activedTime',
+        type: TYPES_MAP.date,
+        config: {
+          dateRange: ['2020-1-1', '2021-12-31']
+        }
+      }
+    ]
+  },
 })
 
 fs.writeFileSync('./output.js', JSON.stringify(result, null, 2));

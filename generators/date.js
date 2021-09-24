@@ -24,11 +24,13 @@ function generator (options, _generator) {
   if (config.dateRange) {
     const startDate = new Date(config.dateRange[0]).valueOf();
     const endDate = new Date(config.dateRange[1]).valueOf();
-    result = new Date(Math.round(getRandomNumber(startDate, endDate)));
+    result = new Date(getRandomNumber(startDate, endDate));
   }
 
   if (config.formater) {
     result = dateFormat(result, config.formater);
+  } else {
+    result = dateFormat(result);
   }
 
   const { hooks = {} } = config;

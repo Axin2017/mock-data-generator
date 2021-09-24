@@ -9,7 +9,7 @@
  *      afterCreated: (result: any) => any
  *    }
  *  },
- *  children: [options]
+ *  properties: [options]
  * }} options
  */
 function generator (options, _generator) {
@@ -17,17 +17,17 @@ function generator (options, _generator) {
 
   const {
     config = {},
-    children = []
+    properties = []
   } = options;
 
-  for (let i = 0; i < children.length; i++) {
-    let item = _generator(children[i]);
+  for (let i = 0; i < properties.length; i++) {
+    let item = _generator(properties[i]);
     if (config.validator) {
       while (!config.validator(item)) {
-        item = _generator(children[i]);
+        item = _generator(properties[i]);
       }
     }
-    result[children[i].key] = item;
+    result[properties[i].key] = item;
   }
 
   const { hooks = {} } = config;

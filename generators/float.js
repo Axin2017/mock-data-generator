@@ -1,4 +1,4 @@
-const { getRandomNumber } = require('../utils');
+const { getRandomFloat } = require('../utils');
 
 /**
  * @export
@@ -25,10 +25,10 @@ function generator(options, _generator) {
   const precision = config.precision || 1; // 默认保留一位小数
 
   if (config.range) {
-    result = getRandomNumber(config.range[0], config.range[1]);
+    result = getRandomFloat(config.range[0], config.range[1]);
     if (config.validator) {
       while (!config.validator(result)) {
-        result = getRandomNumber(config.range[0], config.range[1]);
+        result = getRandomFloat(config.range[0], config.range[1]);
       }
     }
   }

@@ -4,6 +4,7 @@ const _float = require('./float');
 const _object = require('./object');
 const _array = require('./array');
 const _date = require('./date');
+const _oneOf = require('./oneOf');
 
 
 const TYPES_MAP = {
@@ -12,7 +13,8 @@ const TYPES_MAP = {
   float: 'float',
   object: 'object',
   array: 'array',
-  date: 'date'
+  date: 'date',
+  oneOf: 'oneOf'
 }
 
 /**
@@ -39,6 +41,7 @@ function generator(options = {}) {
     [TYPES_MAP.object]: _object,
     [TYPES_MAP.array]: _array,
     [TYPES_MAP.date]: _date,
+    [TYPES_MAP.oneOf]: _oneOf,
   };
 
   let result = null;
