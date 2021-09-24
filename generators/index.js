@@ -17,6 +17,16 @@ const TYPES_MAP = {
   oneOf: 'oneOf'
 }
 
+const typeMap = {
+  [TYPES_MAP.number]: _number,
+  [TYPES_MAP.string]: _string,
+  [TYPES_MAP.float]: _float,
+  [TYPES_MAP.object]: _object,
+  [TYPES_MAP.array]: _array,
+  [TYPES_MAP.date]: _date,
+  [TYPES_MAP.oneOf]: _oneOf,
+};
+
 /**
  * @export
  * @param {{
@@ -34,16 +44,6 @@ const TYPES_MAP = {
   * }} options
   */
 function generator(options = {}) {
-  const typeMap = {
-    [TYPES_MAP.number]: _number,
-    [TYPES_MAP.string]: _string,
-    [TYPES_MAP.float]: _float,
-    [TYPES_MAP.object]: _object,
-    [TYPES_MAP.array]: _array,
-    [TYPES_MAP.date]: _date,
-    [TYPES_MAP.oneOf]: _oneOf,
-  };
-
   let result = null;
 
   const {
@@ -64,5 +64,23 @@ function generator(options = {}) {
   return result;
 }
 
+/**
+ * 
+ * @param {string} name 类型名称
+ * @param {{ generator: (options: object) => any }} typeConfig 
+ */
+function registerType(name, typeConfig) {
+  
+  if (typeMap[name]) {
+    throw new Error(`you have registered type of ${name} already`)
+  }
+
+  typeMap[name] = function(options) {
+    const result = typeConfig.generator(options);
+    return result;
+  }
+}
+
 exports.generator = generator;
+exports.registerType = registerType;
 exports.TYPES_MAP = TYPES_MAP;

@@ -1,12 +1,62 @@
 const fs = require('fs');
 
-const { generator, TYPES_MAP } = require('./generators');
+const { generator, TYPES_MAP, registerType } = require('./generators');
 
 function createMockData(configFilePath, outputPath) {
   const config = require(configFilePath);
   const mockData = generator(config);
   fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
 }
+
+registerType('tt', {
+  generator: (options) => {
+    let result = '';
+
+    const {
+      config = {}
+    } = options;
+
+    result = 'tttttttt';
+
+    if (config.validator) {
+      while (!config.validator(result)) {
+        result = GetRandomString(length);
+      }
+    }
+
+    const { hooks = {} } = config;
+    if (hooks.afterCreated) {
+      result = hooks.afterCreated(result);
+    }
+
+    return result;
+  }
+});
+
+registerType('tt', {
+  generator: (options) => {
+    let result = '';
+
+    const {
+      config = {}
+    } = options;
+
+    result = 'tttttttt';
+
+    if (config.validator) {
+      while (!config.validator(result)) {
+        result = GetRandomString(length);
+      }
+    }
+
+    const { hooks = {} } = config;
+    if (hooks.afterCreated) {
+      result = hooks.afterCreated(result);
+    }
+
+    return result;
+  }
+})
 
 const result = generator({
   type: TYPES_MAP.array,
@@ -71,6 +121,13 @@ const result = generator({
         type: TYPES_MAP.date,
         config: {
           dateRange: ['2020-1-1', '2021-12-31']
+        }
+      },
+      {
+        key: 'bbbb',
+        type: 'tt',
+        config: {
+          length: 20
         }
       }
     ]
